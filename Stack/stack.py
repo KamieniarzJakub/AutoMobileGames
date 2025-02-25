@@ -10,7 +10,10 @@ pyautogui.PAUSE = 0
 
 def get_game_size():
     screenWidth, screenHeight = pyautogui.size()
-    x, y, game_width, game_height = pyautogui.locateOnScreen("logo.png", confidence=0.9)
+    try:
+        x, y, game_width, game_height = pyautogui.locateOnScreen("logo.png", confidence=0.9)
+    except:
+        x, y, game_width, game_height = pyautogui.locateOnScreen("logoWindows.png", confidence=0.9)
     x, y, game_width, game_height = int(x), int(y), int(game_width), int(game_height)
     while y<screenHeight and pyautogui.pixelMatchesColor(x, y, WHITE, tolerance=10):
         y+=1
