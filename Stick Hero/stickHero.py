@@ -81,12 +81,11 @@ def play_game():
         time.sleep(3)
 
         #print(x, y, game_width, game_height)
-        game = np.array(pyautogui.screenshot("game.png", region=(x, y, game_width, game_height)))
+        game = np.array(pyautogui.screenshot(region=(x, y, game_width, game_height)))
         score_img = game[int(game_height*0.1):int(game_height*0.25), int(game_width*0.25):int(game_width*0.75)]
         score_img = cv2.cvtColor(score_img, cv2.COLOR_RGB2GRAY)
         # Apply threshold (adjust values if needed)
         _, score_img = cv2.threshold(score_img, 230, 255, cv2.THRESH_BINARY)
-        cv2.imwrite("score.png", score_img)
         reader = easyocr.Reader(['en'])
         data = reader.readtext(score_img, allowlist="1234567890")
         try:
